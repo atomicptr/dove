@@ -16,6 +16,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: JRMurr/direnv-nix-action@v4.1.0
+        with:
+          cache-store: "false"
       - name: Test
         shell: bash
         run: |
