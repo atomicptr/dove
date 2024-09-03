@@ -1,6 +1,6 @@
 # dove
 
-A tiny single fileh eader only messaging system for games written in C++23
+A tiny, single file, header only messaging system for games written in C++23
 
 Inspired by [pidgeon](https://github.com/atomicptr/pidgeon).
 
