@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <functional>
+#include <iterator>
 #include <queue>
 #include <source_location>
 #include <unordered_map>
@@ -49,7 +50,7 @@ namespace dove {
     template <typename MessageType, typename MessageData>
     class Broker {
       public:
-        using WhoPtr = void*;
+        using WhoPtr = const void*;
         using ListenerFn = std::function<bool(WhoPtr, MessageType, MessageData)>;
         using Listener = std::tuple<WhoPtr, ListenerFn, const std::source_location>;
         using Message = std::tuple<MessageType, MessageData>;
@@ -79,12 +80,12 @@ namespace dove {
         }
 
         void remove_listener(WhoPtr who) {
-            for (auto message_type : listeners) {
-                listeners[message_type].erase(std::remove_if(
-                    listeners[message_type].begin(),
-                    listeners[message_type].end(),
-                    [&who](auto& listener) { return listener.get(0) == who; }
-                ));
+            for (auto& [type, vec] : listeners) {
+                std::vector<Listener> new_vec;
+                std::copy_if(vec.begin(), vec.end(), std::back_inserter(new_vec), [who](const auto& listener) {
+                    return std::get<0>(listener) != who;
+                });
+                listeners.at(type).swap(new_vec);
             }
         }
 
