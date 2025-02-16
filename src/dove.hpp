@@ -13,37 +13,23 @@
 #endif
 
 #ifndef DOVE_DEBUG_PRINT_FUNC
-    #include <print>
-    #define DOVE_DEBUG_PRINT_FUNC std::println
+    #include "print.hpp"
+    #define DOVE_DEBUG_PRINT_FUNC xyz::println
 #endif
 
 #ifndef DOVE_WARN_PRINT_FUNC
-    #include <print>
-    #define DOVE_WARN_PRINT_FUNC std::println
+    #include "print.hpp"
+    #define DOVE_WARN_PRINT_FUNC xyz::println
 #endif
 
 #ifndef DOVE_ERR_PRINT_FUNC
-    #include <print>
-    #define DOVE_ERR_PRINT_FUNC(...) std::println(stderr, __VA_ARGS__)
+    #include "print.hpp"
+    #define DOVE_ERR_PRINT_FUNC(...) xyz::println(std::cerr, __VA_ARGS__)
 #endif
 
 #ifndef DOVE_ASSERT_FUNC
-    #include <format>
-    #define DOVE_ASSERT_FUNC(condition, ...)                                 \
-        if (!(condition)) {                                                  \
-            auto rapture_loc = std::source_location::current();              \
-            DOVE_ERR_PRINT_FUNC("");                                         \
-            DOVE_ERR_PRINT_FUNC(                                             \
-                "========= ASSERTATION FAILED {}:{}:{} =========",           \
-                rapture_loc.file_name(),                                     \
-                rapture_loc.line(),                                          \
-                rapture_loc.column()                                         \
-            );                                                               \
-            DOVE_ERR_PRINT_FUNC("\tAssert :\t{}", (#condition));             \
-            DOVE_ERR_PRINT_FUNC("\tMessage:\t{}", std::format(__VA_ARGS__)); \
-            DOVE_ERR_PRINT_FUNC("");                                         \
-            std::abort();                                                    \
-        }
+    #include "rapture.hpp"
+    #define DOVE_ASSERT_FUNC rpt_assert
 #endif
 
 namespace dove {

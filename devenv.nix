@@ -1,9 +1,11 @@
-let
-  pkgs = import <nixpkgs> { };
-in
-pkgs.mkShell {
+{ pkgs, ... }:
+
+{
   packages = with pkgs; [
-    gcc14
     llvmPackages_19.clang-tools
+    cmake
+    just
+
+    gcc14
   ];
 }
