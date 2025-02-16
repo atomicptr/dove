@@ -8,17 +8,26 @@ on:
       - synchronize
 
 jobs:
-  tests:
-    name: tests
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      matrix:
+        config:
+          - name: linux/gcc
+            os: ubuntu-latest
+            cc: gcc-14
+            cxx: g++-14
+          - name: linux/clang
+            os: ubuntu-latest
+            cc: clang-18
+            cxx: clang++-18
+    runs-on: ${{ matrix.config.os }}
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: JRMurr/direnv-nix-action@v4.1.0
-        with:
-          cache-store: "false"
-      - name: Test
+      - uses: actions/checkout@v4
+      - uses: extractions/setup-just@v2
+      - uses: lukka/get-cmake@latest
+      - name: test with ${{ matrix.config.name }}
         shell: bash
-        run: |
-          ./run_tests.sh
+        env:
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
+        run: just test

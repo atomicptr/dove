@@ -11,23 +11,23 @@
 #include <iostream>
 
 namespace xyz {
-    template<class... Args>
+    template <class... Args>
     inline void print(std::format_string<Args...> fmt, Args&&... args) {
-        print(std::cout, fmt, args...);
+        print(std::cout, fmt, std::forward<Args>(args)...);
     }
 
-    template<class... Args>
+    template <class... Args>
     inline void print(std::ostream& stream, std::format_string<Args...> fmt, Args&&... args) {
-        stream << std::format(fmt, args...);
+        stream << std::format(fmt, std::forward<Args>(args)...);
     }
 
-    template<class... Args>
+    template <class... Args>
     inline void println(std::format_string<Args...> fmt, Args&&... args) {
-        println(std::cout, fmt, args...);
+        println(std::cout, fmt, std::forward<Args>(args)...);
     }
 
-    template<class... Args>
+    template <class... Args>
     inline void println(std::ostream& stream, std::format_string<Args...> fmt, Args&&... args) {
-        stream << std::format(fmt, args...) << std::endl;
+        stream << std::format(fmt, std::forward<Args>(args)...) << std::endl;
     }
 }

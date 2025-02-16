@@ -35,7 +35,7 @@
 namespace dove {
     template <typename MessageType, typename MessageData>
     class Broker {
-      public:
+    public:
         using WhoPtr = const void*;
         using ListenerFn = std::function<bool(WhoPtr, MessageType, MessageData)>;
         using Listener = std::tuple<WhoPtr, ListenerFn, const std::source_location>;
@@ -115,7 +115,7 @@ namespace dove {
 #endif
         }
 
-      private:
+    private:
         std::unordered_map<MessageType, std::vector<Listener>> listeners;
         std::queue<Message> messages;
     };

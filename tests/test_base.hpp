@@ -1,5 +1,6 @@
 #pragma once
 
-#include "../src/dove.hpp"
+#include "rapture.hpp"
+#include "dove.hpp"
 
-#define assert DOVE_ASSERT_FUNC
+#define DOVE_DEBUG 1

@@ -4,8 +4,8 @@
 #include <source_location>
 
 #ifndef RAPTURE_PRINT_FUNC
-    #include <print>
-    #define RAPTURE_PRINT_FUNC(...) std::println(stderr, __VA_ARGS__)
+    #include "print.hpp"
+    #define RAPTURE_PRINT_FUNC(...) xyz::println(std::cerr, __VA_ARGS__)
 #endif
 
 #define rpt_assert(condition, ...)                                          \

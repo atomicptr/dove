@@ -12,7 +12,7 @@ int main() {
     bool message_send = false;
 
     b.add_listener("test", nullptr, [](auto _receiver, auto msg, auto data) {
-        assert(msg == "test", "expected message to be 'test'");
+        rpt_assert(msg == "test", "expected message to be 'test'");
         *data.message_send = true;
         return true;
     });
@@ -21,7 +21,7 @@ int main() {
 
     b.process_messages();
 
-    assert(message_send, "expected message to be send");
-    
+    rpt_assert(message_send, "expected message to be send");
+
     return 0;
 }
