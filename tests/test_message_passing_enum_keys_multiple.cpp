@@ -1,10 +1,6 @@
 #include "test_base.hpp"
 
-enum class Key {
-    A,
-    B,
-    C
-};
+enum class Key { A, B, C };
 
 struct Test {
     int* a;
@@ -37,7 +33,7 @@ int main() {
 
     b.add_listeners({Key::A, Key::B, Key::C}, nullptr, func);
 
-    auto t = Test{&a_send, &b_send, &c_send};
+    auto t = Test {&a_send, &b_send, &c_send};
 
     b.post(Key::A, t);
     b.post(Key::A, t);
