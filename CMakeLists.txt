@@ -19,3 +19,9 @@ add_test(NAME test_message_passing COMMAND $<TARGET_FILE:test_message_passing>)
 
 add_executable(test_remove_listener tests/test_remove_listener.cpp)
 add_test(NAME test_remove_listener COMMAND $<TARGET_FILE:test_remove_listener>)
+
+add_executable(test_register_many_listeners tests/test_register_many_listeners.cpp)
+add_test(NAME test_register_many_listeners COMMAND $<TARGET_FILE:test_register_many_listeners>)
+
+add_executable(test_custom_whoptr tests/test_custom_whoptr.cpp)
+add_test(NAME test_custom_whoptr COMMAND $<TARGET_FILE:test_custom_whoptr>)

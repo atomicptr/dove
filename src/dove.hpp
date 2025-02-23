@@ -33,10 +33,10 @@
 #endif
 
 namespace dove {
-    template <typename MessageType, typename MessageData>
+    template <typename MessageType, typename MessageData, typename WhoType = const void*>
     class Broker {
     public:
-        using WhoPtr = const void*;
+        using WhoPtr = WhoType;
         using ListenerFn = std::function<bool(WhoPtr, MessageType, MessageData)>;
         using Listener = std::tuple<WhoPtr, ListenerFn, const std::source_location>;
         using Message = std::tuple<MessageType, MessageData>;
